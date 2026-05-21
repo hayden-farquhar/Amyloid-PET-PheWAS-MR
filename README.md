@@ -1,5 +1,9 @@
 # Amyloid-PET PheWAS-MR — public reproducibility package
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20334183.svg)](https://doi.org/10.5281/zenodo.20334183)
+[![Pre-registration](https://img.shields.io/badge/OSF-10.17605%2FOSF.IO%2FHVEDJ-blue)](https://doi.org/10.17605/OSF.IO/HVEDJ)
+[![Licence: MIT + CC-BY 4.0](https://img.shields.io/badge/licence-MIT%20%2B%20CC--BY%204.0-lightgrey)](LICENSE)
+
 **Manuscript title:** Genetically-predicted amyloid-PET burden localises Alzheimer's disease causation to the chr1q32.2 CR1 region: a pre-registered phenome-wide Mendelian randomization study with cascade triangulation and cross-ancestry replication
 
 **Author:** Hayden Farquhar, MBBS MPHTM (independent researcher; Finley, New South Wales, Australia)
@@ -8,7 +12,9 @@
 
 **Pre-registration:** OSF DOI [10.17605/OSF.IO/HVEDJ](https://doi.org/10.17605/OSF.IO/HVEDJ) (frozen 2026-05-19; 4 amendments publicly versioned at the OSF project node)
 
-**Zenodo DOI:** (to be assigned at deposit minting; will be inserted here)
+**Zenodo conceptDOI (all versions):** [10.5281/zenodo.20334183](https://doi.org/10.5281/zenodo.20334183) — stable identifier that always resolves to the latest version of this deposit.
+
+**Zenodo versionDOI (v1.0.1):** [10.5281/zenodo.20334254](https://doi.org/10.5281/zenodo.20334254) — cite this for version-specific reproducibility.
 
 **License:** MIT for code (R + Python + bash) | CC-BY 4.0 for derived data products (Causal Atlas, instrument tables, MR result parquets, figures) — see `LICENSE`
 
@@ -95,7 +101,7 @@ If you use this Atlas or the analytical pipeline in derivative work, please cite
 
 > Farquhar H. Genetically-predicted amyloid-PET burden localises Alzheimer's disease causation to the chr1q32.2 CR1 region: a pre-registered phenome-wide Mendelian randomization study with cascade triangulation and cross-ancestry replication. *[Journal]* (year). DOI: [manuscript DOI]
 >
-> Farquhar H. Amyloid-PET PheWAS-MR — public reproducibility package (Version 1.0) [Data set]. Zenodo. DOI: [Zenodo DOI to be assigned]
+> Farquhar H. Amyloid-PET PheWAS-MR — public reproducibility package (Version 1.0.1) [Data set]. Zenodo. DOI: [10.5281/zenodo.20334254](https://doi.org/10.5281/zenodo.20334254). Latest version: [10.5281/zenodo.20334183](https://doi.org/10.5281/zenodo.20334183).
 
 Pre-registration:
 

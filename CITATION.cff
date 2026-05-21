@@ -43,5 +43,11 @@ abstract: >-
   SHA256 hashes are documented for re-download.
 identifiers:
   - type: doi
+    value: "10.5281/zenodo.20334183"
+    description: "Zenodo conceptDOI (all versions; stable identifier for the deposit across future releases)"
+  - type: doi
+    value: "10.5281/zenodo.20334254"
+    description: "Zenodo versionDOI (v1.0.1)"
+  - type: doi
     value: "10.17605/OSF.IO/HVEDJ"
     description: "Pre-registration on OSF (locked 2026-05-19; 4 amendments publicly versioned)"

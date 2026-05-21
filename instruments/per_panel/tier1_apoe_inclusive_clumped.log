@@ -1,0 +1,31 @@
+PLINK v1.90b7.1 64-bit (18 Oct 2023)
+Options in effect:
+  --bfile /Users/haydenfarquhar/Documents/Research Projects/60 Statin MR Pathogen/data/reference/EUR
+  --clump data/interim/instruments/tier1_apoe_inclusive.assoc
+  --clump-kb 10000
+  --clump-p1 5e-08
+  --clump-p2 5e-08
+  --clump-r2 0.001
+  --out data/interim/instruments/tier1_apoe_inclusive_clumped
+
+Hostname: Haydens-iMac.local
+Working directory: /Users/haydenfarquhar/Documents/Research Projects/81 Amyloid PET PheWAS MR
+Start time: Tue May 19 21:54:59 2026
+
+Random number seed: 1779191699
+16384 MB RAM detected; reserving 8192 MB for main workspace.
+8550156 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+data/interim/instruments/tier1_apoe_inclusive_clumped.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is in [0.9999995, 1).
+8550156 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+--clump: 6 clumps formed from 243 top variants.
+Results written to
+data/interim/instruments/tier1_apoe_inclusive_clumped.clumped .
+
+End time: Tue May 19 21:56:58 2026

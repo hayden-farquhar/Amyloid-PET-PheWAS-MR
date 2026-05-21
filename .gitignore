@@ -1,0 +1,26 @@
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+
+# Local secrets — never commit
+.env
+*.pem
+*.key
+
+# Large derived data not for this repo (re-runnable from pipeline)
+# Keep all current contents — Zenodo deposit IS the curated subset

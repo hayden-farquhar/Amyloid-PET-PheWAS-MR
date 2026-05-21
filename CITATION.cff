@@ -1,0 +1,54 @@
+cff-version: 1.2.0
+title: "Amyloid-PET PheWAS-MR — public reproducibility package"
+message: "If you use this work, please cite both the manuscript and this deposit."
+type: dataset
+authors:
+  - family-names: Farquhar
+    given-names: Hayden
+    orcid: "https://orcid.org/0009-0002-6226-440X"
+    email: hayden.farquhar@icloud.com
+    affiliation: "Independent researcher (Finley, New South Wales, Australia)"
+keywords:
+  - Mendelian randomization
+  - amyloid-PET
+  - Alzheimer's disease
+  - PheWAS
+  - FinnGen
+  - colocalisation
+  - CR1
+  - APOE
+  - phenome-wide association study
+  - drug-target MR
+  - pre-registration
+license:
+  - MIT
+  - CC-BY-4.0
+license-url: "https://github.com/spdx/license-list-data"
+repository-code: "https://doi.org/10.17605/OSF.IO/HVEDJ"
+date-released: 2026-05-21
+version: "1.0"
+abstract: >
+  Reproducibility package for the first pre-registered phenome-wide
+  Mendelian randomization study of amyloid-PET cortical deposition against
+  1,574 FinnGen R12 disease endpoints (N=500,348). The conservative
+  wide-APOE-excluded instrument panel resolves to a single chr1q32.2 CR1
+  signal colocalising with brain-cortical CR1 expression at PP.H4 = 0.983,
+  with a pre-registered negative-control diagnostic that bounds the strength
+  of the CR1-as-mediator claim under coloc.abf evidence-symmetry constraints.
+  The deposit includes the locked 41-section pre-registration with 4
+  publicly-versioned amendments, the analytical pipeline (R + Python +
+  bash), the per-panel instrument lists, the Amyloid-PET Causal Atlas
+  (7,870 rows × 46 cols) as parquet + TSV + interactive HTML browser, per-
+  stage MR result parquets, manuscript figures, and supplementary tables.
+  Upstream summary-level GWAS data and reference panels are not
+  redistributed; canonical sources and SHA256 hashes are documented for
+  re-download.
+references:
+  - type: report
+    title: "Phenome-wide Mendelian randomization of genetically-proxied cortical amyloid-β deposition against 1,574 FinnGen R12 disease endpoints (pre-registration)"
+    authors:
+      - family-names: Farquhar
+        given-names: Hayden
+    year: 2026
+    doi: "10.17605/OSF.IO/HVEDJ"
+    notes: "Locked pre-registration; 4 publicly-versioned amendments"

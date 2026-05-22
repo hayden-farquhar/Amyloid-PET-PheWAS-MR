@@ -28,7 +28,7 @@ suppressPackageStartupMessages({
   library(susieR)
 })
 
-proj_root <- "/Users/haydenfarquhar/Documents/Research Projects/81 Amyloid PET PheWAS MR"
+proj_root <- Sys.getenv("AMYLOID_PHEWAS_MR_ROOT", ".")
 dir_interim <- file.path(proj_root, "data/interim/coloc_susie")
 dir_processed <- file.path(proj_root, "data/processed")
 

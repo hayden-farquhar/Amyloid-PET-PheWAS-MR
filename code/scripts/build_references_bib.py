@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 """Build manuscript/references.bib from CrossRef + PubMed lookups.
 
 Used in lieu of a reference manager — Hayden does not use Zotero / EndNote /
@@ -166,7 +167,7 @@ def to_bibtex(key: str, m: dict) -> str:
     return "\n".join(lines)
 
 def main() -> int:
-    proj_root = Path("/Users/haydenfarquhar/Documents/Research Projects/81 Amyloid PET PheWAS MR")
+    proj_root = Path(os.environ.get("AMYLOID_PHEWAS_MR_ROOT", "."))
     out_fp = proj_root / "manuscript" / "references.bib"
 
     entries = []

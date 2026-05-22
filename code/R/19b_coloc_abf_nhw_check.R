@@ -11,7 +11,7 @@ suppressPackageStartupMessages({
   library(coloc)
 })
 
-proj_root <- "/Users/haydenfarquhar/Documents/Research Projects/81 Amyloid PET PheWAS MR"
+proj_root <- Sys.getenv("AMYLOID_PHEWAS_MR_ROOT", ".")
 ali_nhw_fp <- file.path(proj_root, "data/interim/coloc_susie/ali_nhw_chr1q322.tsv")
 ali_me_fp  <- file.path(proj_root, "data/interim/coloc_susie/ali_chr1q322.tsv")
 eqtl_fp    <- file.path(proj_root, "data/interim/coloc_susie/chr1q32.2_brain_cortex_raw.tsv")

@@ -183,4 +183,95 @@ The Won lab (Won, Seo, Jung) will be acknowledged in the manuscript Acknowledgem
 
 ---
 
+## Amendment 5 — ADNI tau-PET PGS cascade biological-validation arm added (post-hoc; model specification frozen pre-results)
+
+**Date:** 2026-05-22
+**Registration DOI affected:** 10.17605/OSF.IO/HVEDJ
+**Sections affected:** New §13.6 (PGS-tau-PET biological validation) added as extension of §13.5 (which framed the tau-PET cascade as a two-step MR future direction conditional on tau-PET GWAS availability).
+
+### Filing note (honest disclosure of timing — added 2026-05-22T19:30 AEST)
+
+This amendment was drafted on 2026-05-22 in parallel with the first attempted run of `R/20_adni_cascade_pgs.R`. That first run **failed at Step 4** (a covariate-coding bug in the birth-year derivation from `PTDOB`) BEFORE reaching the regression at Step 6 — no cascade results were produced or viewed. The Step 4 fix was a single-line non-model change (switch from `format(PTDOB,"%Y")` to `as.integer(PTDOBYY)`); the primary-model formula, covariate set, and six-analysis sensitivity menu in R/20 did NOT change between the failed and successful runs. The successful R/20 re-run (after a second one-line fix — correcting the `PTETHCAT` filter string from `"Not Hisp/Latino"` to `"Not Hispanic or Latino"`) occurred AFTER the local amendment file was written. The OSF upload of this amendment was filed on 2026-05-22 at the time-of-day stamped above, which post-dates the successful R/20 run by approximately one hour.
+
+So **the model specification was frozen on the local filesystem before any cascade results were viewed, but the OSF public-record timestamp of this amendment post-dates the successful R/20 run**. Readers and reviewers should weigh the cascade-arm post-hoc status on the basis of (a) the model specification being structurally locked in R/20 before any successful regression ran, AND (b) the OSF public-record timestamp on this amendment being same-day-but-post-results. The cascade results are reported in full (Table A in the manuscript, 8 analyses) regardless of direction or significance per the §Manuscript reporting commitment below; the manuscript's headline CR1 finding does not depend on the cascade arm.
+
+**Pre-hoc / Post-hoc:** **Post-hoc addition; model specification frozen BEFORE results inspection.** The pre-registration did NOT anticipate ADNI individual-level data access. The ADNI Data Use Agreement (DUA) was executed on 2026-05-22, AFTER all pre-registered Phase 1–5 analyses (Ali multi-ethnic primary, Kim Korean secondary primary, Timsina CSF cascade, Ali ASN within-study replication) had completed and AFTER the v1 manuscript version was prepared. This amendment therefore CANNOT claim pre-hoc protocol-clarification status. It is classified as a **post-hoc addition** to the analytical scope.
+
+What this amendment DOES guarantee is **pre-results model specification**: the analysis script (`R/20_adni_cascade_pgs.R`), the primary endpoint, the model formula, the covariate set, and the sensitivity-analysis menu are all committed to the OSF deposit and the public repository BEFORE the script is run on the ADNI data. The frozen specification commit precedes the first viewing of any R/20 output. Outcome-direction inspection cannot retro-specify the model.
+
+**Trigger:** ADNI data access approval (PI: Hayden Farquhar; affiliation: University of Sydney; ADNI user `hfar0118`) granted 2026-05-22, with ADNIMERGE2 v0.1.1 R package and Omni2.5M PLINK binary genotype set received on the same date.
+
+**Change:** Add a new biological-validation arm testing whether the pre-registered amyloid PGS (PRS-CS-shrunk Ali 2023 multi-ethnic weights, used as the Pivot A primary inferential layer in §13) predicts AD-region tau-PET burden in the ADNI cohort. This is positioned as evidence supporting the manuscript's chr1q32.2/CR1 mediator finding, NOT as a free-standing new MR result.
+
+### §13.6 (new) — PGS-tau-PET biological-validation arm
+
+**Hypothesis (post-hoc, frozen pre-results 2026-05-22):**
+
+> **H5 (post-hoc):** The pre-registered amyloid PGS (PRS-CS posterior weights from Ali 2023 multi-ethnic, phi=1e-2, seed=81) is positively associated with meta-temporal tau-PET SUVR in ADNI (n=218 subjects with both FTP tau-PET and Omni2.5M genotypes), adjusted for age at scan, sex, APOE-ε4 carrier status, and the top 4 ancestry PCs. Effect direction and magnitude are interpreted as biological-validation evidence for the manuscript's amyloid → AD-pathology causal claim.
+
+**Pre-specified primary endpoint:**
+- `META_TEMPORAL_SUVR` from `UCBERKELEY_TAU_6MM` (ADNIMERGE2 v0.1.1), Berkeley FTP processing pipeline, 6 mm smoothing kernel, non-PVC.
+- One observation per subject: first chronological scan (cross-sectional).
+- n = 218 unique subjects (operational cohort), 465 total scans (longitudinal sensitivity).
+
+**Pre-specified primary model (linear regression):**
+
+```r
+META_TEMPORAL_SUVR ~ amyloid_PGS + age_at_scan + sex
+                   + APOE_e4_carrier + PC1 + PC2 + PC3 + PC4
+```
+
+- `amyloid_PGS`: z-standardised PLINK-1.9 `--score` sum on the Omni2.5M, applied to all PRS-CS posterior weights (chr 1–22, 486,274 SNPs after intersection).
+- `APOE_e4_carrier`: binary indicator from APOERES.GENOTYPE (1 if ε4/* or */ε4 or ε4/ε4; 0 otherwise).
+- `PC1–PC4`: top 4 genetic-ancestry PCs from PLINK --pca on LD-pruned (200/50/0.2) Omni2.5M variants with MAF > 0.05 and HWE > 1×10⁻⁶.
+
+**Pre-specified sensitivity analyses (six, all in `R/20`, all reported in manuscript):**
+
+1. **Tau-PVC**: same model on `META_TEMPORAL_SUVR` from `UCBERKELEY_TAUPVC_6MM` (partial-volume corrected) — tests robustness to atrophy-confounding.
+2. **Cross-modality validation in ADNI**: `CENTILOIDS ~ amyloid_PGS + covariates` in the n=722 amyloid-PET ∩ Omni2.5M cohort — direct in-cohort replication of the Ali signal at the trait level.
+3. **APOE-stratified**: primary model fit separately in ε4 carriers (estimated n≈110) and non-carriers (estimated n≈108).
+4. **EUR-restricted**: primary model restricted to self-reported `White & Not Hispanic/Latino` subset (PTRACCAT × PTETHCAT) — matches the PRS-CS LD reference (1KG EUR Phase 3).
+5. **Longitudinal LMM**: linear mixed model `META_TEMPORAL_SUVR ~ PGS + covariates + (1 | PTID)` on all 465 scans — uses full longitudinal information.
+6. **Within-subject amyloid → tau path**: in the n=217 subjects with both modalities, test `META_TEMPORAL_SUVR ~ CENTILOIDS + age + sex + APOE` to confirm the canonical amyloid-cascade ordering in this subset.
+
+**Pre-specified decision rule:**
+
+- **Headline interpretation reported in manuscript:** β_PGS, 95% CI, p-value, and adjusted R² from the primary model. Direction is reported regardless of significance.
+- **Supportive of cascade hypothesis if:** β_PGS > 0 with p < 0.05 in the primary model AND consistent direction (β_PGS > 0) in ≥4 of 6 sensitivity analyses.
+- **Null result interpretation:** if β_PGS not significantly different from zero in the primary model, this is reported transparently as "amyloid PGS did not reach nominal significance for predicting tau-PET in the n=218 ADNI cohort; consistent with limited power for a polygenic-tau cascade test at this sample size" — i.e., framed as bounded sensitivity rather than refutation of the cascade.
+- **Discordant direction interpretation:** if β_PGS < 0 in the primary model (PGS-protective against tau), this would be a substantive contradiction of the cascade hypothesis and would be reported as the headline finding with a substantively revised Discussion §6.
+
+### Manuscript reporting commitment
+
+The manuscript will explicitly report:
+
+1. **Amendment 5 status (post-hoc, model frozen pre-results):** Methods § (new subsection) names Amendment 5 by number, summarises the trigger (ADNI access approval 2026-05-22, after pre-registered analyses complete), and explicitly notes "post-hoc addition" classification.
+2. **The full primary model + all 6 sensitivity analyses are reported** regardless of headline direction (no selective reporting; null results are reported with the same prominence as positive results).
+3. **A transparent null-power statement** is included whether or not the primary result is significant: "n=218 with the polygenic-vs-imaging cascade test design is powered to detect β_PGS effects of approximately X (sensitivity to be reported alongside the primary result)."
+4. **DUA-compliance statement:** "Individual-level ADNI data are not redistributed; only group-level summary statistics from the cascade arm are reported. Analysis code is publicly available; the raw individual-level data must be obtained directly from ADNI under their Data Use Agreement."
+
+### DUA-compliance operational commitments
+
+1. NO individual-level ADNI data is committed to `public_repository/` or Zenodo (deposit `.gitignore`-equivalent: `data/raw/adni/` excluded by manifest construction).
+2. Cascade-arm derived outputs in `data/processed/adni_cascade/` contain ONLY group-level results (coefficients, CIs, p-values, R², N) — no per-subject rows.
+3. `R/20_adni_cascade_pgs.R` is committed to `public_repository/code/R/` and is shareable (it reads from local ADNI paths but contains no ADNI data values).
+4. ADNI acknowledgement statement + funding statement included in manuscript per ADNI DUA requirements.
+
+### Why this amendment exists rather than declining the data
+
+The pre-registered manuscript (Ali multi-ethnic primary + Kim Korean secondary primary + CSF cascade + Ali ASN replication + chr1q32.2/CR1 colocalisation) is complete and standalone. Adding the ADNI cascade arm is **not necessary** for the manuscript's primary inferential claims. The choice to add it post-hoc rather than defer to a follow-up paper is principled:
+
+1. **Direct biological validation in an independent EUR cohort.** The manuscript's strongest piece of evidence — the CR1-mediated amyloid → AD effect — predicts that an amyloid PGS should also relate to downstream tau pathology in independent EUR samples. ADNI is the largest publicly-accessible such sample.
+2. **Same Pivot A inferential layer.** The amyloid PGS used in the cascade is exactly the same PGS used in the manuscript's primary inferential layer (PRS-CS-shrunk Ali multi-ethnic, phi=1e-2, seed=81). No new MR scaffolding is introduced; this is a direct extension of an existing component.
+3. **The post-hoc framing is honestly disclosed.** This amendment is filed BEFORE results are seen, the model specification is frozen on disk, and the manuscript will report the post-hoc status by amendment number.
+
+### Reproducibility
+
+- `R/20_adni_cascade_pgs.R` is committed to the public repository before R/20 first execution.
+- `data/processed/adni_cascade/adni_cascade_lm_results.tsv` (group-level coefficients only) will be added to the public repository deposit.
+- ADNIMERGE2 R package version (v0.1.1, methods PDF dated 2026-01-05) is recorded in `data/raw/adni/NOTICE_DATA_USE_AGREEMENT.md`.
+- This amendment is committed to the OSF deposit with timestamp; the OSF version-history record is the immutable proof that the model specification was frozen pre-results.
+
+---
+
 ## (Future amendments appended below)

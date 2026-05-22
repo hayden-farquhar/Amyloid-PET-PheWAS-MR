@@ -23,7 +23,7 @@ license: MIT
 repository-code: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
 url: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
 date-released: "2026-05-22"
-version: "1.0.2"
+version: "1.0.3"
 abstract: >-
   Reproducibility package for the first pre-registered phenome-wide
   Mendelian randomization study of amyloid-PET cortical deposition against
@@ -36,24 +36,38 @@ abstract: >-
   Catalogue) identifies CR1 as the most plausible mediating transcript
   over CR1L (no Brain_Cortex eQTL) and CD46 (credible set 238 kb from
   the amyloid signal). A pre-registered negative-control diagnostic is
-  engaged as a tissue-of-action divergence. The deposit includes the
-  locked 41-section pre-registration with 4 publicly-versioned amendments,
-  the analytical pipeline (R + Python + bash; 18 R scripts including the
-  R/17 per-gene SuSiE decomposition, R/19 formal coloc.susie attempt
-  with kriging diagnostic, and R/19b cross-cohort coloc.abf cross-check),
-  the per-panel instrument lists, the Amyloid-PET Causal Atlas (7,870
-  rows × 46 cols) as parquet + TSV + interactive HTML browser, per-stage
-  MR result parquets, manuscript figures (including the chr1q32.2
-  regional plot), and supplementary tables S1 (per-panel SNP inventory)
-  and S2 (per-gene SuSiE credible-set membership). Code is licensed MIT;
-  derived data products are licensed CC-BY 4.0 — see LICENSE file for
-  full dual-licence terms. Upstream summary-level GWAS data and reference
-  panels are not redistributed; canonical sources and SHA256 hashes are
-  documented for re-download.
+  engaged as a tissue-of-action divergence. A post-hoc ADNI tau-PET
+  polygenic-score cascade biological-validation arm (n=218 EUR with
+  Berkeley flortaucipir tau-PET and Omni2.5M genotypes; OSF Amendment 5
+  with model specification frozen pre-results) confirms the pre-registered
+  amyloid PGS predicts meta-temporal tau-PET SUVR (beta=0.081, p=2.98e-5),
+  persisting in APOE-e4 non-carriers (beta=0.044, p=4.5e-3, n=146) and
+  supporting the wide-APOE-excluded CR1 localisation independently of the
+  FinnGen MR. The deposit includes the locked 41-section pre-registration
+  with 5 publicly-versioned amendments (4 pre-results + Amendment 5
+  post-hoc with model frozen pre-results), the analytical pipeline (R +
+  Python + bash; 20 R scripts including R/17 per-gene SuSiE decomposition,
+  R/19 formal coloc.susie attempt with kriging diagnostic, R/19b
+  cross-cohort coloc.abf cross-check, and R/20 ADNI tau-PET PGS cascade
+  with primary + six pre-specified sensitivity analyses), the per-panel
+  instrument lists, the Amyloid-PET Causal Atlas (7,870 rows x 46 cols)
+  as parquet + TSV + interactive HTML browser, per-stage MR result
+  parquets, ADNI cascade group-level summary TSVs (no individual-level
+  ADNI data per the Data Use Agreement), manuscript figures (including
+  the chr1q32.2 regional plot), and supplementary tables S1 (per-panel
+  SNP inventory), S2 (per-gene SuSiE credible-set membership), and S3
+  (ADNI cascade arm cohort details + full results). Code is licensed
+  MIT; derived data products are licensed CC-BY 4.0 — see LICENSE file
+  for full dual-licence terms. Upstream summary-level GWAS data,
+  individual-level ADNI data, and reference panels are not redistributed;
+  canonical sources and SHA256 hashes are documented for re-download.
 identifiers:
   - type: doi
     value: "10.5281/zenodo.20334183"
     description: "Zenodo conceptDOI (all versions; stable identifier for the deposit across future releases)"
   - type: doi
     value: "10.17605/OSF.IO/HVEDJ"
-    description: "Pre-registration on OSF (locked 2026-05-19; 4 amendments publicly versioned)"
+    description: "Pre-registration on OSF (locked 2026-05-19; immutable registered snapshot)"
+  - type: url
+    value: "https://osf.io/7u8a9/"
+    description: "OSF parent project (mutable; hosts the post-deposit amendment log with full version history including Amendment 5 OSF-timestamped 2026-05-22T10:29:53 UTC)"

@@ -46,6 +46,7 @@ Total: ~108 files, ~12 MB (chr1q32.2 Brain_Cortex full-pairs extract is ~9 MB; t
 | `18_figure_chr1q322_regional.R` | chr1q32.2 regional plot: amyloid GWAS Manhattan track + per-gene SuSiE credible sets |
 | `19_coloc_susie_chr1q322_eur_formal.R` | Formal amyloid-side coloc.susie attempt with SuSiE-RSS kriging diagnostic + L-progression + outlier removal (documents the multi-SNP-tight-LD limitation; transparency artefact) |
 | `19b_coloc_abf_nhw_check.R` | Cross-cohort coloc.abf cross-check using Ali NHW EUR-only sumstats; replicates PP.H4 = 0.977 at CR1 |
+| `20_adni_cascade_pgs.R` | ADNI tau-PET PGS cascade biological-validation arm (OSF Amendment 5; post-hoc with model frozen pre-results). Reads from a user-provided local ADNI checkout (DUA-restricted; not redistributed). Computes the pre-registered primary endpoint (META_TEMPORAL_SUVR ~ amyloid_PGS + covariates) + six pre-specified sensitivity analyses (tau-PVC, cross-modality amyloid centiloid, APOE-stratified, EUR-only, longitudinal LMM). |
 
 ## `code/scripts/` — Auxiliary scripts
 
@@ -112,12 +113,22 @@ Total: ~108 files, ~12 MB (chr1q32.2 Brain_Cortex full-pairs extract is ~9 MB; t
 | `coloc_susie_intermediates/chr1q32.2_brain_cortex_raw.tsv` | GTEx_V8 Brain_Cortex full-pairs nominal eQTL stats for chr1q32.2 ± 500 kb (59,594 rows = 3,255 SNPs × ~18 genes); fetched via tabix from EBI eQTL Catalogue mirror |
 | `coloc_susie_intermediates/chr1q32.2_ld.bim` | PLINK BIM for the chr1q32.2 1KG EUR Phase 3 LD reference subset (2,292 SNPs) |
 
+## `results/adni_cascade/` — ADNI tau-PET PGS cascade arm (Amendment 5; group-level summary only)
+
+| File | Purpose |
+|---|---|
+| `adni_cascade_lm_results.tsv` | Primary cross-sectional cascade + 5 sensitivity OLS analyses (6 rows × 9 cols: analysis, n, beta, SE, 95% CI, p, R², adj R²) |
+| `adni_cascade_lmm_results.tsv` | Longitudinal LMM cascade (tau + amyloid centiloid; 2 rows × 8 cols) |
+
+**DUA-compliance note:** Individual-level ADNI data are NOT redistributed. The `adni_cascade/` subdirectory contains only group-level summary statistics. The full `R/20` analysis script is shareable; the raw ADNI checkout must be obtained from adni.loni.usc.edu under their DUA.
+
 ## `supplementary/`
 
 | File | Purpose |
 |---|---|
 | `supplementary_table_S1.md` | Per-panel SNP inventory (16 SNPs × full annotation × panel membership) |
 | `supplementary_table_S2.md` | Per-gene SuSiE credible-set membership at chr1q32.2 in GTEx_V8 Brain_Cortex (CR1 + CD46 credible-set members with PIPs + amyloid GWAS z/p + eQTL z; CR1L noted as having no credible set) |
+| `supplementary_table_S3.md` | ADNI cascade arm (Amendment 5): cohort details + per-analysis full coefficients (mirrors the Table S3 in the manuscript submission supplementary file) |
 
 ## `docs/`
 

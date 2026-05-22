@@ -20,7 +20,7 @@ suppressPackageStartupMessages({
   library(scales)
 })
 
-proj_root <- "/Users/haydenfarquhar/Documents/Research Projects/81 Amyloid PET PheWAS MR"
+proj_root <- Sys.getenv("AMYLOID_PHEWAS_MR_ROOT", ".")
 ali_fp <- file.path(proj_root, "data/interim/coloc_susie/ali_chr1q322.tsv")
 cs_fp  <- file.path(proj_root, "data/processed/susie_chr1q322_brain_cortex_cs_members.parquet")
 out_dir <- file.path(proj_root, "results/figures")

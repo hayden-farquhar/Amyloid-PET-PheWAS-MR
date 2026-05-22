@@ -23,31 +23,37 @@ license: MIT
 repository-code: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
 url: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
 date-released: "2026-05-22"
-version: "1.0.1"
+version: "1.0.2"
 abstract: >-
   Reproducibility package for the first pre-registered phenome-wide
   Mendelian randomization study of amyloid-PET cortical deposition against
   1,574 FinnGen R12 disease endpoints (N=500,348). The conservative
-  wide-APOE-excluded instrument panel resolves to a single chr1q32.2 CR1
-  signal colocalising with brain-cortical CR1 expression at PP.H4 = 0.983,
-  with a pre-registered negative-control diagnostic that bounds the strength
-  of the CR1-as-mediator claim under coloc.abf evidence-symmetry
-  constraints. The deposit includes the locked 41-section pre-registration
-  with 4 publicly-versioned amendments, the analytical pipeline (R + Python
-  + bash), the per-panel instrument lists, the Amyloid-PET Causal Atlas
-  (7,870 rows × 46 cols) as parquet + TSV + interactive HTML browser, per-
-  stage MR result parquets, manuscript figures, and supplementary tables.
-  Code is licensed MIT; derived data products are licensed CC-BY 4.0 — see
-  LICENSE file for full dual-licence terms. Upstream summary-level GWAS
-  data and reference panels are not redistributed; canonical sources and
-  SHA256 hashes are documented for re-download.
+  wide-APOE-excluded instrument panel localises the AD causal signal to
+  the chr1q32.2 CR1 region; the colocalisation replicates cleanly across
+  cohort configurations (coloc.abf PP.H4 = 0.983 multi-ethnic primary,
+  0.977 NHW EUR-only sub-meta), and per-gene SuSiE fine-mapping on
+  full-pairs Brain_Cortex eQTL data (fetched byte-range from the EBI eQTL
+  Catalogue) identifies CR1 as the most plausible mediating transcript
+  over CR1L (no Brain_Cortex eQTL) and CD46 (credible set 238 kb from
+  the amyloid signal). A pre-registered negative-control diagnostic is
+  engaged as a tissue-of-action divergence. The deposit includes the
+  locked 41-section pre-registration with 4 publicly-versioned amendments,
+  the analytical pipeline (R + Python + bash; 18 R scripts including the
+  R/17 per-gene SuSiE decomposition, R/19 formal coloc.susie attempt
+  with kriging diagnostic, and R/19b cross-cohort coloc.abf cross-check),
+  the per-panel instrument lists, the Amyloid-PET Causal Atlas (7,870
+  rows × 46 cols) as parquet + TSV + interactive HTML browser, per-stage
+  MR result parquets, manuscript figures (including the chr1q32.2
+  regional plot), and supplementary tables S1 (per-panel SNP inventory)
+  and S2 (per-gene SuSiE credible-set membership). Code is licensed MIT;
+  derived data products are licensed CC-BY 4.0 — see LICENSE file for
+  full dual-licence terms. Upstream summary-level GWAS data and reference
+  panels are not redistributed; canonical sources and SHA256 hashes are
+  documented for re-download.
 identifiers:
   - type: doi
     value: "10.5281/zenodo.20334183"
     description: "Zenodo conceptDOI (all versions; stable identifier for the deposit across future releases)"
-  - type: doi
-    value: "10.5281/zenodo.20334254"
-    description: "Zenodo versionDOI (v1.0.1)"
   - type: doi
     value: "10.17605/OSF.IO/HVEDJ"
     description: "Pre-registration on OSF (locked 2026-05-19; 4 amendments publicly versioned)"

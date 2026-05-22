@@ -197,14 +197,18 @@ Last updated: ', last_updated, '.</p>
       Sparse instruments increase weak-instrument bias risk. The PGS-MR layer (PRS-CS-weighted)
       is the manuscript\'s primary inferential layer for non-APOE inference; the locus-level
       results here are sensitivity-suite outputs.</li>
-  <li>GTEx colocalisation uses significant-pairs data only (full-pairs are 50-200 GB per tissue
-      and not downloaded). Treat PP.H4 > 0.5 hits as a coloc <em>screen</em>, not a definitive
-      coloc claim; reproduce with coloc.susie + full-pairs data for confirmed hits.</li>
+  <li>The genome-wide GTEx download ships significant-pairs only (full-pairs are 50-200 GB per tissue).
+      For the chr1q32.2 CR1 locus we additionally fetched full-pairs nominal eQTL stats from the
+      EBI eQTL Catalogue mirror (~9 MB byte-range pull) and ran per-gene SuSiE fine-mapping
+      (CR1 / CR1L / CD46) plus cross-cohort coloc.abf replication (PP.H4 = 0.977 NHW EUR-only
+      ≈ 0.982 multi-ethnic re-run ≈ 0.983 original). For other lead loci, PP.H4 > 0.5
+      hits in the Atlas table remain a coloc <em>screen</em>; full-pairs follow-up at the EBI
+      Catalogue is the reproducible next step.</li>
   <li>FinnGen R12 outcomes use Finnish founder-population LD; harmonisation against EUR
       exposure IVs may miss minor proxy-driven effects. See pre-reg §6.8 for details.</li>
   <li>The atlas is locked at the manuscript submission cycle, but the pre-registration\'s
-      <a href="https://osf.io/7u8a9/">amendment log</a> remains the authoritative record of any
-      protocol deviations.</li>
+      <a href="https://doi.org/10.17605/OSF.IO/HVEDJ">amendment log</a> remains the authoritative
+      record of any protocol deviations.</li>
 </ul>
 
 <div class="footer">

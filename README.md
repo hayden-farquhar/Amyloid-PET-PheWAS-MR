@@ -24,21 +24,21 @@
 
 ## What this deposit contains
 
-This is the reproducibility package for the first pre-registered phenome-wide Mendelian randomization (PheWAS-MR) of amyloid-PET cortical deposition against 1,574 FinnGen R12 disease endpoints. The headline finding is that the conservative wide-APOE-excluded instrument panel localises the AD causal signal to the chr1q32.2 CR1 region (PP.H4 = 0.983 with brain-cortical CR1 expression), with a pre-registered negative-control diagnostic that bounds the strength of the CR1-as-mediator claim.
+This is the reproducibility package for the first pre-registered phenome-wide Mendelian randomization (PheWAS-MR) of amyloid-PET cortical deposition against 1,574 FinnGen R12 disease endpoints. The headline finding is that the conservative wide-APOE-excluded instrument panel localises the AD causal signal to the chr1q32.2 CR1 region. The colocalisation replicates cleanly across cohort configurations (coloc.abf PP.H4 = 0.983 multi-ethnic primary, 0.977 NHW EUR-only sub-meta), and per-gene SuSiE fine-mapping on full-pairs Brain_Cortex eQTL data (fetched byte-range from the EBI eQTL Catalogue) identifies CR1 as the most plausible mediating transcript over the co-located CR1L (no Brain_Cortex eQTL) and CD46 (credible set 238 kb from the amyloid signal). A pre-registered negative-control diagnostic (forearm fracture) is engaged as a tissue-of-action divergence rather than mediator-gene ambiguity.
 
 The deposit includes:
 
 | Directory | Contents | Purpose |
 |---|---|---|
 | `prereg/` | Locked 41-section pre-registration, 4 amendment logs, ethics determination, exposure-choice pre-spec, power-atlas pre-spec, phecode-filter pre-spec CSV, data-snapshot log | Audit trail of the locked protocol; every analytical decision is referenced to a §-numbered registration section |
-| `code/R/` | 14 R scripts (00-16) implementing Phase 1-5 + atlas build + manuscript figures | Re-runnable analytical pipeline |
-| `code/scripts/` | 4 Python + 2 shell utilities (tabix sweep, IV-list builder, PRS-CS input formatter, PRS-CS driver, wide-PGS lifter) | Auxiliary code |
+| `code/R/` | 18 R scripts (00–19, including R/13b) implementing Phase 1–5 + atlas build + manuscript figures + the chr1q32.2 per-gene SuSiE decomposition (R/17), the regional plot (R/18), and the formal coloc.susie attempt with kriging diagnostic (R/19) + the coloc.abf cross-cohort cross-check (R/19b) | Re-runnable analytical pipeline |
+| `code/scripts/` | Python + shell utilities (tabix sweep, IV-list builder, PRS-CS input formatter, PRS-CS driver, wide-PGS lifter, CrossRef-based references.bib builder) | Auxiliary code |
 | `instruments/` | 16-SNP unified instrument list, Phase 1 verdict (Pivot A activation rationale), 5 per-panel PLINK clumping outputs, wide-PGS IV lists | Reproducible IV construction |
-| `results/` | Amyloid-PET Causal Atlas (parquet + TSV mirror + interactive HTML browser), top-hits parquet, per-stage result parquets (locus MR, CSF cascade, coloc, sensitivity MR, PGS-MR narrow + wide, cross-ancestry per-IV + per-panel, Steiger), and 5 manuscript figures (PDF + PNG) | All evidence layers + Atlas browser |
-| `supplementary/` | Supplementary Table S1 (per-panel SNP inventory) | Submission-ready supplementary material |
+| `results/` | Amyloid-PET Causal Atlas (parquet + TSV mirror + interactive HTML browser), top-hits parquet, per-stage result parquets (locus MR, CSF cascade, coloc, sensitivity MR, PGS-MR narrow + wide, cross-ancestry per-IV + per-panel, Steiger), per-gene SuSiE outputs at chr1q32.2 (per-gene credible-set membership + amyloid GWAS lookup; formal coloc.susie outputs + kriging diagnostic), regional figure for the chr1q32.2 cascade, and 5 + 1 manuscript figures (PDF + PNG) | All evidence layers + Atlas browser |
+| `supplementary/` | Supplementary Table S1 (per-panel SNP inventory) + Supplementary Table S2 (per-gene SuSiE credible-set membership at chr1q32.2) | Submission-ready supplementary material |
 | `docs/` | Software environment specification, data-provenance manifest with upstream SHA256 hashes | Reproducibility metadata |
 
-**Total deposit size:** ~2.5 MB (60 files). Well within Zenodo single-record limits (50 GB; 100 MB per file).
+**Total deposit size:** ~12 MB (~110 files; the chr1q32.2 Brain_Cortex full-pairs eQTL extract is ~9 MB). Well within Zenodo single-record limits (50 GB; 100 MB per file).
 
 ---
 
@@ -80,6 +80,8 @@ This package is the *derived* reproducibility layer. The upstream summary-level 
 8. **Build the Causal Atlas + browser**: run `code/R/09_build_causal_atlas.R` (produces `results/amyloid_pet_causal_atlas.parquet`) and `code/R/12_build_atlas_browser.R` (produces `results/atlas_browser.html`).
 
 9. **Reproduce manuscript figures**: run `code/R/16_manuscript_figures.R`.
+
+10. **Reproduce the chr1q32.2 per-gene SuSiE decomposition + cross-cohort coloc.abf cross-check** (post-hoc; addresses the multi-causal architecture that coloc.abf alone cannot resolve): run `code/R/17_coloc_susie_chr1q322.R` (per-gene SuSiE on full-pairs Brain_Cortex eQTL data fetched byte-range from the EBI eQTL Catalogue mirror; ~9 MB region pull), `code/R/18_figure_chr1q322_regional.R` (regional plot), `code/R/19_coloc_susie_chr1q322_eur_formal.R` (formal amyloid-side coloc.susie attempt with SuSiE-RSS kriging diagnostic + L-progression + outlier removal; documents the multi-SNP-tight-LD limitation), and `code/R/19b_coloc_abf_nhw_check.R` (cross-cohort coloc.abf cross-check using Ali NHW EUR-only sumstats; replicates PP.H4 = 0.977 at CR1, ruling out EAS-arm-driven inflation).
 
 **Wall-clock estimate**: Phase 1 + Phase 2 + Phases 3-5 = ~2-4 hours on a modern laptop. PRS-CS MCMC for the polygenic-score layer is the longest single step (~3-6 hours single-threaded on CPU). Total end-to-end ~6-10 hours assuming all upstream data are local.
 

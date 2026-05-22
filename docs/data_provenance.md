@@ -49,13 +49,13 @@ This document records the canonical sources, accession identifiers, retrieval da
 
 ## Upstream reference and eQTL sources
 
-### GTEx v8 — Brain cis-eQTL significant-pairs (Phase 4 colocalisation)
+### GTEx v8 — Brain cis-eQTL data (Phase 4 colocalisation + chr1q32.2 per-gene SuSiE)
 
 - **Tissues used:** 13 brain regions: Amygdala, Anterior cingulate cortex BA24, Caudate basal ganglia, Cerebellar Hemisphere, Cerebellum, Cortex, Frontal Cortex BA9, Hippocampus, Hypothalamus, Nucleus accumbens basal ganglia, Putamen basal ganglia, Spinal cord cervical c-1, Substantia nigra
 - **Genome build:** GRCh38
-- **Source:** [GTEx Portal Google Cloud bucket](https://storage.googleapis.com/adult-gtex/bulk-qtl/v8/)
-- **Format used here:** Significant-pairs only (FDR<0.05 per tissue; ~154 MB total across 13 tissues). Full-pairs data (50-200 GB per tissue) was NOT used; the manuscript notes this as a limitation that warrants full-pairs coloc.susie follow-up.
-- **Citation:** GTEx Consortium *Science* 2020
+- **Source (genome-wide screen — significant-pairs):** [GTEx Portal Google Cloud bucket](https://storage.googleapis.com/adult-gtex/bulk-qtl/v8/) (significant-pairs only; FDR<0.05 per tissue; ~154 MB total across 13 tissues). Used for the Phase 4 coloc.abf screen across all lead loci.
+- **Source (chr1q32.2 full-pairs for per-gene SuSiE):** [EBI eQTL Catalogue tabix mirror](https://ftp.ebi.ac.uk/pub/databases/spot/eQTL/imported/GTEx_V8/ge/Brain_Cortex.tsv.gz) — bgzip + tabix-indexed; full-pairs nominal eQTL data for the chr1q32.2 ± 500 kb window fetched via tabix HTTP byte-range query (~9 MB region pull rather than the 3.4 GB tissue file). Used for `code/R/17_coloc_susie_chr1q322.R` (per-gene SuSiE on CR1 / CR1L / CD46) and `code/R/19_coloc_susie_chr1q322_eur_formal.R` (formal amyloid-side coloc.susie attempt).
+- **Citation:** GTEx Consortium *Science* 2020; EBI eQTL Catalogue (Kerimov et al. 2021 *Nat Genet*)
 
 ### eQTLGen Phase 1 — Whole-blood cis-eQTL significant-pairs
 

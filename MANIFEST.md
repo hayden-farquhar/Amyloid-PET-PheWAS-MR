@@ -1,6 +1,6 @@
 # Deposit MANIFEST (human-readable)
 
-Total: 89 files, ~2.5 MB. SHA256 hashes are in `MANIFEST.sha256` for machine-readable verification.
+Total: ~108 files, ~12 MB (chr1q32.2 Brain_Cortex full-pairs extract is ~9 MB; the rest is small). SHA256 hashes are in `MANIFEST.sha256` for machine-readable verification.
 
 ## Top-level
 
@@ -42,6 +42,10 @@ Total: 89 files, ~2.5 MB. SHA256 hashes are in `MANIFEST.sha256` for machine-rea
 | `14_steiger_directionality.R` | Steiger reverse-causation guard per (panel × phecode × IV) |
 | `15_kim_korean_secondary_primary.R` | Amendment 4 Component B: Kim Korean as secondary primary discovery arm |
 | `16_manuscript_figures.R` | Generates Fig 2 (CR1 locus zoom), Fig 3 (cross-ancestry concordance), Fig 4 (forest plot) |
+| `17_coloc_susie_chr1q322.R` | Per-gene SuSiE fine-mapping at chr1q32.2 on Brain_Cortex full-pairs eQTL data (CR1, CR1L, CD46) + amyloid GWAS lookup |
+| `18_figure_chr1q322_regional.R` | chr1q32.2 regional plot: amyloid GWAS Manhattan track + per-gene SuSiE credible sets |
+| `19_coloc_susie_chr1q322_eur_formal.R` | Formal amyloid-side coloc.susie attempt with SuSiE-RSS kriging diagnostic + L-progression + outlier removal (documents the multi-SNP-tight-LD limitation; transparency artefact) |
+| `19b_coloc_abf_nhw_check.R` | Cross-cohort coloc.abf cross-check using Ali NHW EUR-only sumstats; replicates PP.H4 = 0.977 at CR1 |
 
 ## `code/scripts/` — Auxiliary scripts
 
@@ -53,21 +57,23 @@ Total: 89 files, ~2.5 MB. SHA256 hashes are in `MANIFEST.sha256` for machine-rea
 | `make_prscs_sumstats.py` | Converts Ali 2023 GRCh38 sumstats to PRS-CS input format (15.6M → 10.4M SNPs) |
 | `run_prscs_amyloid.sh` | PRS-CS MCMC driver (phi=1e-2, seed=81, default 1000 iter / 500 burnin) |
 | `sweep_finngen_r12.sh` | Hardened tabix sweep over FinnGen R12 sumstats (~300× faster than full download); includes macOS-specific portability traps |
+| `build_references_bib.py` | CrossRef API-based references.bib builder; 32 entries with DOI resolution; manual-overrides dict for ambiguous lookups |
 
 ## `instruments/` — Instrument-variable construction outputs
 
 | File | Purpose |
 |---|---|
 | `unified_iv_list.tsv` | 16 SNPs × panel-membership (the master IV table; source of Supp Table S1) |
-| `PHASE1_VERDICT.md` | Phase 1 verdict document: per-panel n_IV, mean F, and Pivot A activation rationale |
+| `phase1_instrument_construction.md` | Phase 1 instrument-construction record: per-panel n_IV, mean F, Pivot A activation rationale |
 | `ali2023_significant_annotated.tsv` | 313 pre-clump SNPs (p < 1e-6) after liftover + rsID annotation |
 | `pgs_wide_iv_list.tsv` | Full top-500 PRS-CS-weighted SNP list (wide-PGS source) |
 | `pgs_wide_iv_list_noAPOE.tsv` | Top-50 non-APOE PRS-CS-weighted SNPs (wide-PGS arm) |
-| `per_panel/tier1_apoe_inclusive*` | Tier 1 APOE-inclusive (n=6 IVs): .clumped, .log, .nosex, _index_snps.tsv, .assoc |
-| `per_panel/tier1_apoe_narrow_excl*` | Tier 1 narrow-excluded (n=5): same 5 files |
-| `per_panel/tier1_apoe_wide_excl*` | Tier 1 wide-excluded (n=3; Pivot A primary): same 5 files |
-| `per_panel/tier2_apoe_narrow_excl*` | Tier 2 narrow-excluded (n=13): same 5 files |
-| `per_panel/tier2_apoe_wide_excl*` | Tier 2 wide-excluded (n=11): same 5 files |
+| `per_panel/tier1_apoe_inclusive*` | Tier 1 APOE-inclusive (n=6 IVs): `.clumped` (PLINK output) + `_index_snps.tsv` + `.assoc` |
+| `per_panel/tier1_apoe_narrow_excl*` | Tier 1 narrow-excluded (n=5): same 3 files |
+| `per_panel/tier1_apoe_wide_excl*` | Tier 1 wide-excluded (n=3; Pivot A primary): same 3 files |
+| `per_panel/tier2_apoe_narrow_excl*` | Tier 2 narrow-excluded (n=13): same 3 files |
+| `per_panel/tier2_apoe_wide_excl*` | Tier 2 wide-excluded (n=11): same 3 files |
+| `per_panel/process_logs/*.log` | PLINK execution logs for the 5 per-panel clumping runs (audit value; not analytically informative) |
 
 ## `results/` — Derived data products
 
@@ -96,12 +102,22 @@ Total: 89 files, ~2.5 MB. SHA256 hashes are in `MANIFEST.sha256` for machine-rea
 | `figures/fig2_CR1_locuszoom.{pdf,png}` | Fig 2: CR1 locus-zoom |
 | `figures/fig3_cross_ancestry_concordance.{pdf,png}` | Fig 3: cross-ancestry concordance |
 | `figures/fig4_forest_top_hits.{pdf,png}` | Fig 4: forest plot of top hits |
+| `figures/fig5_chr1q322_regional.{pdf,png}` | Fig 5: chr1q32.2 regional plot — amyloid GWAS Manhattan track + per-gene SuSiE credible sets (CR1, CD46; CR1L has no credible set) |
+| `susie_chr1q322_brain_cortex_gene_summary.{parquet,tsv}` | Per-gene SuSiE summary at chr1q32.2 (CR1, CR1L, CD46): credible-set lead + amyloid GWAS lookup + distance-from-amyloid-lead |
+| `susie_chr1q322_brain_cortex_cs_members.{parquet,tsv}` | Per-credible-set SNP membership (25 rows) with PIPs + amyloid GWAS z/p + eQTL z |
+| `coloc_susie_chr1q322_eur_formal.{parquet,tsv}` | Formal amyloid-side coloc.susie outputs (NHW + 1KG EUR LD) — transparency artefact; PP.H4 ≈ 0 / PP.H3 ≈ 1 attributable to known multi-SNP-tight-LD limitation; the replicated coloc.abf is the substantive evidence |
+| `coloc_susie_diagnostic_nhw.tsv` | SuSiE-RSS kriging diagnostic (1,758 SNPs; 23 LD-inconsistent outliers flagged) |
+| `coloc_susie_intermediates/ali_chr1q322.tsv` | Ali 2023 multi-ethnic amyloid-PET sumstats for chr1q32.2 ± 500 kb (4,938 SNPs); input to R/17 |
+| `coloc_susie_intermediates/ali_nhw_chr1q322.tsv` | Ali 2023 NHW sub-meta sumstats for chr1q32.2 ± 500 kb (4,416 SNPs); input to R/19 + R/19b |
+| `coloc_susie_intermediates/chr1q32.2_brain_cortex_raw.tsv` | GTEx_V8 Brain_Cortex full-pairs nominal eQTL stats for chr1q32.2 ± 500 kb (59,594 rows = 3,255 SNPs × ~18 genes); fetched via tabix from EBI eQTL Catalogue mirror |
+| `coloc_susie_intermediates/chr1q32.2_ld.bim` | PLINK BIM for the chr1q32.2 1KG EUR Phase 3 LD reference subset (2,292 SNPs) |
 
 ## `supplementary/`
 
 | File | Purpose |
 |---|---|
 | `supplementary_table_S1.md` | Per-panel SNP inventory (16 SNPs × full annotation × panel membership) |
+| `supplementary_table_S2.md` | Per-gene SuSiE credible-set membership at chr1q32.2 in GTEx_V8 Brain_Cortex (CR1 + CD46 credible-set members with PIPs + amyloid GWAS z/p + eQTL z; CR1L noted as having no credible set) |
 
 ## `docs/`
 

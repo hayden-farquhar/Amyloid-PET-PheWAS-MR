@@ -34,8 +34,11 @@ estimated by ordinary least squares with the PGS expressed in standard-deviation
 | Sensitivity 5: EUR-only (White, Non-Hisp) | 195 / 195 | 0.0964 | 0.0219 | 0.0531, 0.1397 | 1.85×10⁻⁵ | 0.208 | 0.174 |
 | Longitudinal LMM: tau (random subj intercept) | 218 / 465 | 0.0900 | 0.0191 | 0.0526, 0.1274 | 4.40×10⁻⁶ | — | — |
 | Longitudinal LMM: amyloid centiloid | 719 / 1,971 | 33.83 | 1.16 | 31.55, 36.10 | 1.49×10⁻¹²³ | — | — |
+| **PGS × APOE-ε4 interaction term** | 218 / 218 | **0.1170** | 0.0377 | 0.0426, 0.1913 | **2.19×10⁻³** | 0.236 | 0.203 |
 
 Primary-model concordant covariate effects: APOE-ε4 carrier β = 0.130 (p = 2.3×10⁻³); age at scan β = 0.0012 (p = 0.65); sex (male) β = −0.076 (p = 0.05). Ancestry PCs were not individually significant. Longitudinal LMM uses `lme4` + `lmerTest`; Satterthwaite df.
+
+**Interaction model spec:** `META_TEMPORAL_SUVR ~ pgs_z * APOE_e4_carrier + age_at_scan + sex_m + PC1 + PC2 + PC3 + PC4` (n=218; OLS). The interaction row above is the cross-product coefficient; both main effects are also in the model. In this same model the pgs_z main effect is β = 0.0328 (SE 0.0242, p = 0.18) — this is the non-carrier-stratum slope (since APOE_e4_carrier is binary 0/1); the carrier-stratum slope is 0.0328 + 0.1170 = 0.1498, consistent with the carrier-only Sensitivity 3 row (β = 0.147). The significant interaction (p = 2.19×10⁻³) tells us the polygenic-amyloid effect on tau-PET is approximately 4.6-fold larger in APOE-ε4 carriers than in non-carriers; the non-carrier effect is independently significant in the stratified Sensitivity 4 model (β = 0.044, p = 4.52×10⁻³). APOE-ε4 amplifies, but does not create, the polygenic-amyloid → tau-PET relationship.
 
 **Pre-specified decision rule (frozen in Amendment 5):** "Supportive of cascade hypothesis if β_PGS > 0 with p < 0.05 in the primary model AND consistent direction (β_PGS > 0) in ≥4 of 6 sensitivity analyses." Observed: primary positive at p = 2.98×10⁻⁵; all 6 sensitivity analyses positive and consistent in direction. The decision rule is satisfied.
 

@@ -23,7 +23,7 @@ license: MIT
 repository-code: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
 url: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
 date-released: "2026-05-22"
-version: "1.0.3"
+version: "1.0.4"
 abstract: >-
   Reproducibility package for the first pre-registered phenome-wide
   Mendelian randomization study of amyloid-PET cortical deposition against
@@ -49,7 +49,10 @@ abstract: >-
   Python + bash; 20 R scripts including R/17 per-gene SuSiE decomposition,
   R/19 formal coloc.susie attempt with kriging diagnostic, R/19b
   cross-cohort coloc.abf cross-check, and R/20 ADNI tau-PET PGS cascade
-  with primary + six pre-specified sensitivity analyses), the per-panel
+  with primary + six pre-specified sensitivity analyses plus a PGS x APOE-e4
+  interaction test added pre-submission in v1.0.4 (interaction p = 2.19e-3,
+  showing APOE-e4 amplifies but does not create the polygenic-amyloid to
+  tau-PET relationship)), the per-panel
   instrument lists, the Amyloid-PET Causal Atlas (7,870 rows x 46 cols)
   as parquet + TSV + interactive HTML browser, per-stage MR result
   parquets, ADNI cascade group-level summary TSVs (no individual-level

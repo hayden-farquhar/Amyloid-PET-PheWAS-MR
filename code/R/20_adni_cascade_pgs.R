@@ -268,6 +268,35 @@ cat("\n--- Longitudinal LMM ---\n")
 print(lmm_rows)
 
 # -----------------------------------------------------------------------------
+# Step 7.5 — PGS × APOE-ε4 interaction test (pre-submission reviewer-anticipated
+# robustness check; formally tests whether the PGS effect on tau-PET differs
+# between APOE-ε4 carriers and non-carriers).
+# -----------------------------------------------------------------------------
+message("\n=== Step 7.5: PGS × APOE-ε4 interaction test ===")
+fit_interaction <- lm(outcome ~ pgs_z * APOE_e4_carrier + age_at_scan + sex_m +
+                                  PC1 + PC2 + PC3 + PC4, data = tau_xs)
+print(summary(fit_interaction)$coefficients)
+int_row <- summary(fit_interaction)$coefficients["pgs_z:APOE_e4_carrier", ]
+int_ci  <- confint(fit_interaction, "pgs_z:APOE_e4_carrier")
+interaction_row <- tibble(
+  analysis    = "interaction_pgs_x_apoe_e4",
+  n           = nrow(tau_xs),
+  beta_pgs    = int_row["Estimate"],
+  se_pgs      = int_row["Std. Error"],
+  ci_lo       = int_ci[1],
+  ci_hi       = int_ci[2],
+  p_pgs       = int_row["Pr(>|t|)"],
+  r2          = summary(fit_interaction)$r.squared,
+  adj_r2      = summary(fit_interaction)$adj.r.squared
+)
+message(sprintf(
+  "  PGS × APOE-ε4 interaction term (n=%d): β = %.4f (95%% CI %.4f, %.4f), p = %.3g",
+  nrow(tau_xs),
+  int_row["Estimate"], int_ci[1], int_ci[2], int_row["Pr(>|t|)"]
+))
+results <- bind_rows(results, interaction_row)
+
+# -----------------------------------------------------------------------------
 # Step 8 — Persist
 # -----------------------------------------------------------------------------
 write_tsv(results,  file.path(OUT_DIR, "adni_cascade_lm_results.tsv"))

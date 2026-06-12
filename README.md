@@ -4,7 +4,7 @@
 [![Pre-registration](https://img.shields.io/badge/OSF-10.17605%2FOSF.IO%2FHVEDJ-blue)](https://doi.org/10.17605/OSF.IO/HVEDJ)
 [![Licence: MIT + CC-BY 4.0](https://img.shields.io/badge/licence-MIT%20%2B%20CC--BY%204.0-lightgrey)](LICENSE)
 
-**Manuscript title:** Genetically-predicted amyloid-PET burden localises Alzheimer's disease causation to the chr1q32.2 CR1 region: a pre-registered phenome-wide Mendelian randomization study with cascade triangulation and cross-ancestry replication
+**Manuscript title:** Pre-registered phenome-wide Mendelian randomization of amyloid-PET: instrument limits and a colocalisation-input artefact
 
 **Author:** Hayden Farquhar, MBBS MPHTM (independent researcher; Finley, New South Wales, Australia)
 **ORCID:** [0009-0002-6226-440X](https://orcid.org/0009-0002-6226-440X)
@@ -14,7 +14,7 @@
 
 **Zenodo conceptDOI (all versions):** [10.5281/zenodo.20334183](https://doi.org/10.5281/zenodo.20334183) — stable identifier that always resolves to the latest version of this deposit.
 
-**Zenodo versionDOI (v1.0.1):** [10.5281/zenodo.20334254](https://doi.org/10.5281/zenodo.20334254) — cite this for version-specific reproducibility.
+**Latest version (v1.1.0, 2026-06-12):** corrects a colocalisation-input artefact and supersedes the colocalisation numbers of earlier releases (see "What this deposit contains" and the v1.1.0 changelog below). The conceptDOI above always resolves to the latest version; the version-specific DOI is assigned at release.
 
 **License:** MIT for code (R + Python + bash) | CC-BY 4.0 for derived data products (Causal Atlas, instrument tables, MR result parquets, figures) — see `LICENSE`
 
@@ -24,7 +24,9 @@
 
 ## What this deposit contains
 
-This is the reproducibility package for the first pre-registered phenome-wide Mendelian randomization (PheWAS-MR) of amyloid-PET cortical deposition against 1,574 FinnGen R12 disease endpoints. The headline finding is that the conservative wide-APOE-excluded instrument panel localises the AD causal signal to the chr1q32.2 CR1 region. The colocalisation replicates cleanly across cohort configurations (coloc.abf PP.H4 = 0.983 multi-ethnic primary, 0.977 NHW EUR-only sub-meta), and per-gene SuSiE fine-mapping on full-pairs Brain_Cortex eQTL data (fetched byte-range from the EBI eQTL Catalogue) identifies CR1 as the most plausible mediating transcript over the co-located CR1L (no Brain_Cortex eQTL) and CD46 (credible set 238 kb from the amyloid signal). A pre-registered negative-control diagnostic (forearm fracture) is engaged as a tissue-of-action divergence rather than mediator-gene ambiguity.
+This is the reproducibility package for a pre-registered phenome-wide Mendelian randomization (PheWAS-MR) of amyloid-PET cortical deposition against 1,574 FinnGen R12 disease endpoints. The scan is instrument-limited: outside APOE the conservative panel resolves to three instruments (effectively the CR1 variant rs6656401), and a per-phecode statistical-power floor (R/21) shows the scan detects only large effects (median minimum detectable odds ratio ≈ 2.8 at the within-panel Bonferroni threshold). The locus that survives is the previously-known CR1 region, where genetically-predicted amyloid, AD risk, and brain-cortical CR1 expression share a causal variant for late-onset AD-spectrum dementia (Brain_Cortex coloc.abf PP.H4 = 0.98) — a shared-variant result that is method- and prior-dependent (coloc.susie disagrees) and that does not establish amyloid mediation (reverse-direction MR, R/25, is itself significant).
+
+**v1.1.0 changelog (2026-06-12) — supersedes earlier colocalisation numbers.** Earlier releases ran coloc.abf on GTEx significant-pairs eQTL data and summarised it as a maximum posterior across tissues; at the tight-LD CR1 locus this inflated false-positive colocalisation (all 16 coloc-tested phecodes, including a forearm-fracture negative control, returned ≈ 0.98). The colocalisation layer is re-run with full-pairs eQTL data in the pre-specified Brain_Cortex tissue (R/24, R/29): the colocalisation is then specific to the late-onset AD-spectrum phecodes and the negative control passes. A pre-specified 24-phenotype negative-control panel (R/23, R/27) and a simulation on the real CR1 LD matrix (R/28) bound the artefact, which is a known colocalisation failure mode (Giambartolomei 2014; Wallace 2021). The earlier "evidence-symmetry / tissue-of-action" framing is retired. New analyses also add the power floor (R/21), colocalisation-prior robustness (R/22), and reverse-direction MR (R/25). Do not cite the pre-v1.1.0 colocalisation numbers.
 
 The deposit includes:
 
@@ -101,7 +103,7 @@ For human-readable inspection, `results/amyloid_pet_causal_atlas.tsv` is a tab-s
 
 If you use this Atlas or the analytical pipeline in derivative work, please cite both the manuscript and this deposit:
 
-> Farquhar H. Genetically-predicted amyloid-PET burden localises Alzheimer's disease causation to the chr1q32.2 CR1 region: a pre-registered phenome-wide Mendelian randomization study with cascade triangulation and cross-ancestry replication. *[Journal]* (year). DOI: [manuscript DOI]
+> Farquhar H. Pre-registered phenome-wide Mendelian randomization of amyloid-PET: instrument limits and a colocalisation-input artefact. *[Journal]* (year). DOI: [manuscript DOI]
 >
 > Farquhar H. Amyloid-PET PheWAS-MR — public reproducibility package (Version 1.0.1) [Data set]. Zenodo. DOI: [10.5281/zenodo.20334254](https://doi.org/10.5281/zenodo.20334254). Latest version: [10.5281/zenodo.20334183](https://doi.org/10.5281/zenodo.20334183).
 

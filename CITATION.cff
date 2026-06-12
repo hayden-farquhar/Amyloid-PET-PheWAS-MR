@@ -22,48 +22,49 @@ keywords:
 license: MIT
 repository-code: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
 url: "https://github.com/hayden-farquhar/Amyloid-PET-PheWAS-MR"
-date-released: "2026-05-22"
-version: "1.0.4"
+date-released: "2026-06-12"
+version: "1.1.0"
 abstract: >-
-  Reproducibility package for the first pre-registered phenome-wide
-  Mendelian randomization study of amyloid-PET cortical deposition against
-  1,574 FinnGen R12 disease endpoints (N=500,348). The conservative
-  wide-APOE-excluded instrument panel localises the AD causal signal to
-  the chr1q32.2 CR1 region; the colocalisation replicates cleanly across
-  cohort configurations (coloc.abf PP.H4 = 0.983 multi-ethnic primary,
-  0.977 NHW EUR-only sub-meta), and per-gene SuSiE fine-mapping on
-  full-pairs Brain_Cortex eQTL data (fetched byte-range from the EBI eQTL
-  Catalogue) identifies CR1 as the most plausible mediating transcript
-  over CR1L (no Brain_Cortex eQTL) and CD46 (credible set 238 kb from
-  the amyloid signal). A pre-registered negative-control diagnostic is
-  engaged as a tissue-of-action divergence. A post-hoc ADNI tau-PET
-  polygenic-score cascade biological-validation arm (n=218 EUR with
-  Berkeley flortaucipir tau-PET and Omni2.5M genotypes; OSF Amendment 5
-  with model specification frozen pre-results) confirms the pre-registered
-  amyloid PGS predicts meta-temporal tau-PET SUVR (beta=0.081, p=2.98e-5),
-  persisting in APOE-e4 non-carriers (beta=0.044, p=4.5e-3, n=146) and
-  supporting the wide-APOE-excluded CR1 localisation independently of the
-  FinnGen MR. The deposit includes the locked 41-section pre-registration
-  with 5 publicly-versioned amendments (4 pre-results + Amendment 5
-  post-hoc with model frozen pre-results), the analytical pipeline (R +
-  Python + bash; 20 R scripts including R/17 per-gene SuSiE decomposition,
-  R/19 formal coloc.susie attempt with kriging diagnostic, R/19b
-  cross-cohort coloc.abf cross-check, and R/20 ADNI tau-PET PGS cascade
-  with primary + six pre-specified sensitivity analyses plus a PGS x APOE-e4
-  interaction test added pre-submission in v1.0.4 (interaction p = 2.19e-3,
-  showing APOE-e4 amplifies but does not create the polygenic-amyloid to
-  tau-PET relationship)), the per-panel
-  instrument lists, the Amyloid-PET Causal Atlas (7,870 rows x 46 cols)
-  as parquet + TSV + interactive HTML browser, per-stage MR result
-  parquets, ADNI cascade group-level summary TSVs (no individual-level
-  ADNI data per the Data Use Agreement), manuscript figures (including
-  the chr1q32.2 regional plot), and supplementary tables S1 (per-panel
-  SNP inventory), S2 (per-gene SuSiE credible-set membership), and S3
-  (ADNI cascade arm cohort details + full results). Code is licensed
-  MIT; derived data products are licensed CC-BY 4.0 — see LICENSE file
-  for full dual-licence terms. Upstream summary-level GWAS data,
-  individual-level ADNI data, and reference panels are not redistributed;
-  canonical sources and SHA256 hashes are documented for re-download.
+  Reproducibility package for a pre-registered phenome-wide Mendelian
+  randomization study of amyloid-PET cortical deposition against 1,574
+  FinnGen R12 disease endpoints (N=500,348). The phenome-wide scan is
+  instrument-limited: outside APOE the conservative panel resolves to
+  three instruments (effectively the CR1 variant rs6656401), and a
+  per-phecode statistical-power floor shows the scan detects only large
+  effects (median minimum detectable odds ratio approx 2.8 at the
+  within-panel Bonferroni threshold). The signal that survives is the
+  previously-known CR1 locus, where genetically-predicted amyloid, AD
+  risk, and brain-cortical CR1 expression share a causal variant for
+  late-onset AD-spectrum dementia (Brain_Cortex coloc.abf PP.H4 = 0.98),
+  a shared-variant result that is method- and prior-dependent (coloc.susie
+  disagrees) and that does not establish amyloid mediation (reverse-direction
+  MR is itself significant). This release (v1.1.0) supersedes the
+  colocalisation numbers of earlier releases: it corrects a colocalisation-input
+  artefact in which coloc.abf run on GTEx significant-pairs eQTL data,
+  summarised as a maximum posterior across tissues, inflated false-positive
+  colocalisation at the tight-LD CR1 locus (all 16 coloc-tested phecodes,
+  including a forearm-fracture negative control, returned approx 0.98). Re-run
+  with full-pairs eQTL data in the pre-specified Brain_Cortex tissue, the
+  colocalisation is specific to the late-onset AD-spectrum phecodes and the
+  negative control passes; a pre-specified 24-phenotype negative-control panel
+  and a simulation on the real CR1 LD matrix bound the artefact (a known
+  failure mode per Giambartolomei 2014 and Wallace 2021). A post-hoc ADNI
+  tau-PET polygenic-score arm (n=218 EUR; OSF Amendment 5, model frozen
+  pre-results) is reported as a coherence check. The deposit includes the
+  locked 41-section pre-registration with 5 publicly-versioned amendments,
+  the analytical pipeline (R + Python + bash; 30 R scripts including R/21
+  power floor and empirical-null calibration, R/22 colocalisation-prior
+  robustness, R/23 negative-control panel, R/24 full-pairs colocalisation
+  regeneration, R/25 reverse-direction MR, R/27 significant-pairs-vs-full-pairs
+  panel, R/28 truncation simulation, and R/29 Brain_Cortex-primary
+  colocalisation), the per-panel instrument lists, the per-phecode results
+  supplement as parquet + TSV + interactive HTML browser, per-stage MR result
+  parquets, ADNI cascade group-level summary TSVs (no individual-level ADNI
+  data per the Data Use Agreement), manuscript figures, and supplementary
+  tables. Code is licensed MIT; derived data products are licensed CC-BY 4.0,
+  see LICENSE file. Upstream summary-level GWAS data, individual-level ADNI
+  data, and reference panels are not redistributed; canonical sources and
+  SHA256 hashes are documented for re-download.
 identifiers:
   - type: doi
     value: "10.5281/zenodo.20334183"
